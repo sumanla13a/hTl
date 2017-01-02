@@ -1,0 +1,8 @@
+{
+	"db": {
+		"name": "htl"
+	},
+	"modelFolder": "modelJson",
+	"hooks": ["after_save.js", "before_save.js", "after_remove.js", "before_remove.js"],
+	"port": 3000
+}
