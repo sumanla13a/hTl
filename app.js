@@ -13,7 +13,10 @@ var users = require('./routes/users');
 var collections = require('./routes/collections');
 var app = express();
 
-require('./lib/generator');
+var ModelsFn = require('./lib/generator');
+new ModelsFn().then(function() {
+  global.modelsCreated = true;  
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
