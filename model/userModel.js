@@ -3,7 +3,7 @@ var db = require('../lib/db.js');
 
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
-
+console.log('require');
 var BluePromise = require('bluebird');
 var Schema = db.Schema;
 var userSchema = new Schema({
@@ -48,5 +48,9 @@ userSchema.pre('save', function (next) {
 });
 
 var user = db.model('user', userSchema, 'user');
-
+console.log(user);
+user.findOne(function(){
+	console.log('user');
+	console.log(arguments);
+});
 module.exports = user;
