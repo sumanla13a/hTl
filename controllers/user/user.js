@@ -43,6 +43,17 @@ var userMethods = {
 				return res.json(new Response(0, new Error(info)));
 			}
 		})(req, res, next);
+	},
+	localLogin: function(req, res, next) {
+		passport.authenticate('local-login', function(err, user, info) {
+			if(err) {
+				return next(err);
+			}
+			if(_.isEmpty(user)) {
+				return res.json(new Response(0, new Error(info)));
+			}
+			return res.json(new Response(1, user));
+		})(req, res, next);
 	}
 };
 

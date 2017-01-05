@@ -11,4 +11,5 @@ router.get('/', User.index);
 router.post('/authenticate', User.authenticate);
 
 router.post('/signup', User.localAuthenticate);
+router.post('/login', User.localLogin);
 module.exports = router;

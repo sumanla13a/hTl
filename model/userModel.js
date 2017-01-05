@@ -3,7 +3,6 @@ var db = require('../lib/db.js');
 
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
-console.log('require');
 var BluePromise = require('bluebird');
 var Schema = db.Schema;
 
@@ -61,14 +60,11 @@ userSchema.pre('save', function (next) {
 	});
 	hash.then(function(salt) {
 		bcrypt.hash(this.local.password, salt, function(err, hash) {
-			console.log('here');
 			this.local.password = hash; 
-			next();
+			return next();
 		}.bind(this));
 	}.bind(this)).catch(function(err) {
-		// TODO: throw error from here later
-		next(err);
-		console.log(err);
+		return next(err);
 	});
 });
 
