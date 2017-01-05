@@ -53,26 +53,27 @@ var collection = {
 	},
 	useOauth: function(req, res, next) {
 		var file = require(authLocation);
+		var callbackBaseURL = config.baseUrl || 'http://localhost:' + config.port;
 		switch(req.body.authType.toLowerCase()){
 			case 'google':
 				file.googleAuth = {
 					'clientID'      : req.body.id,
 					'clientSecret'  : req.body.secret,
-					'callbackURL'   : 'http://localhost:3000/users/auth/google/callback'
+					'callbackURL'   : callbackBaseURL + '/users/auth/google/callback'
 				};
 				break;
 			case 'facebook':
 				file.facebookAuth = {
 					'clientID' 		: req.body.id,
 					'clientSecret'	: req.body.secret,
-					'callbackURL'	: 'http://localhost:3000/users/auth/facebook/callback'
+					'callbackURL'	: callbackBaseURL + '/users/auth/facebook/callback'
 				};
 				break;
 			case 'twitter':
 				file.twitterAuth = {
 					'consumerKey'	: req.body.id,
 					'consumerSecret': req.body.secret,
-					'callbackURL'	: 'http://localhost:3000/users/auth/twitter/callback'
+					'callbackURL'	: callbackBaseURL + '/users/auth/twitter/callback'
 				};
 				break;
 		}
