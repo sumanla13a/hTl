@@ -1,8 +1,16 @@
 {
 	"db": {
-		"name": "htl"
+		"path": "mongodb://localhost/htl" 
 	},
 	"modelFolder": "modelJson",
 	"hooks": ["after_save.js", "before_save.js", "after_remove.js", "before_remove.js"],
-	"port": 3000
+	"port": 3000,
+	"jwt": {
+		"jwtSecret": "hTlisasecretproject",
+		"jwtSession": {
+			"session": false
+		}
+	},
+	"secret": "hTlisasecretproject",
+	"defaultUser": true
 }

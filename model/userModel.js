@@ -6,7 +6,8 @@ const saltRounds = 10;
 console.log('require');
 var BluePromise = require('bluebird');
 var Schema = db.Schema;
-var userSchema = new Schema({
+
+var localSchema = new Schema({
 	email: {
 		type: String,
 		required: true
@@ -14,7 +15,29 @@ var userSchema = new Schema({
 	password: {
 		type: String,
 		required: true
-	},
+	}
+}, {_id: false});
+
+var userSchema = new Schema({
+	local: localSchema,
+    facebook: {
+        id: String,
+        token: String,
+        email: String,
+        name: String
+    },
+    twitter: {
+        id: String,
+        token: String,
+        displayName: String,
+        username: String
+    },
+    google: {
+        id: String,
+        token: String,
+        email: String,
+        name: String
+    },
 	createdAt: {
 		type: Date
 	},
@@ -37,20 +60,22 @@ userSchema.pre('save', function (next) {
 		});
 	});
 	hash.then(function(salt) {
-		bcrypt.hash(this.password, salt, function(err, hash) {
-			this.password = hash; 
+		bcrypt.hash(this.local.password, salt, function(err, hash) {
+			console.log('here');
+			this.local.password = hash; 
 			next();
 		}.bind(this));
 	}.bind(this)).catch(function(err) {
 		// TODO: throw error from here later
+		next(err);
 		console.log(err);
 	});
 });
 
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
+
 var user = db.model('user', userSchema, 'user');
-console.log(user);
-user.findOne(function(){
-	console.log('user');
-	console.log(arguments);
-});
+
 module.exports = user;
