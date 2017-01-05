@@ -14,6 +14,8 @@ var flash = require('connect-flash');
 global.appRoot = path.resolve(__dirname);
 
 var config = require(path.join(global.appRoot, 'configurations/config.json'));
+var authconfig = require(path.join(global.appRoot, 'configurations/auth.json')); 
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var collections = require('./routes/collections');
@@ -40,7 +42,9 @@ app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/', express.static(path.join(__dirname, 'bower_components')));
 app.use('/', routes);
-app.use('/users', users);
+if(authconfig.defaultUser) {
+  app.use('/users', users);
+}
 
 app.use('/collection', collections);
 var ModelsFn = require('./lib/generator');
@@ -85,32 +89,5 @@ new ModelsFn().then(function(models) {
   });
   app.myEmitter.emit('initialized');
 });
-
-/*var apiRoutes = express.Router(); 
-
-if(config.defaultUser) {
-  apiRoutes.use(function(req, res, next) {
-
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-    if (token) {
-      jwt.verify(token, app.get('mySecret'), function(err, decoded) {      
-        if (err) {
-          return res.json({ success: false, message: 'Failed to authenticate token.' });    
-        } else {
-          req.decoded = decoded;    
-          next();
-        }
-      });
-
-    } else {
-      return res.status(403).send({ 
-          success: false, 
-          message: 'No token provided.' 
-      });
-      
-    }
-  });
-}*/
 
 module.exports = app;
