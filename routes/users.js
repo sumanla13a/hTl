@@ -12,4 +12,11 @@ router.post('/authenticate', User.authenticate);
 
 router.post('/signup', User.localAuthenticate);
 router.post('/login', User.localLogin);
+router.get('/auth/facebook', User.facebookAuthenticate);
+router.get('/auth/facebook/callback', User.facebookcallback);
+router.get('/auth/twitter', User.twitterAuthenticate);
+router.get('/auth/twitter/callback', User.twittercallback);
+router.get('/auth/google', User.googleAuthenticate);
+router.get('/auth/google/callback', User.googlecallback);
+router.get('/logout', User.logout);
 module.exports = router;

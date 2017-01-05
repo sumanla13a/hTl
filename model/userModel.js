@@ -2,8 +2,6 @@
 var db = require('../lib/db.js');
 
 var bcrypt = require('bcrypt');
-const saltRounds = 10;
-var BluePromise = require('bluebird');
 var Schema = db.Schema;
 
 var localSchema = new Schema({
@@ -50,22 +48,7 @@ userSchema.pre('save', function (next) {
 		this.createdAt = new Date();
 	}
 	this.updatedAt = new Date();
-	var hash = new BluePromise(function(resolve, reject) {
-		bcrypt.genSalt(saltRounds, function(err, salt) {
-			if(err) {
-				reject(err);
-			}
-			resolve(salt);
-		});
-	});
-	hash.then(function(salt) {
-		bcrypt.hash(this.local.password, salt, function(err, hash) {
-			this.local.password = hash; 
-			return next();
-		}.bind(this));
-	}.bind(this)).catch(function(err) {
-		return next(err);
-	});
+	next();
 });
 
 userSchema.methods.validPassword = function(password) {

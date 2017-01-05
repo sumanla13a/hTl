@@ -54,6 +54,37 @@ var userMethods = {
 			}
 			return res.json(new Response(1, user));
 		})(req, res, next);
+	},
+	facebookAuthenticate: function(req, res, next) {
+		passport.authenticate('facebook', { scope : 'email' })(req, res, next);
+	},
+	facebookcallback: function(req, res, next) {
+		passport.authenticate('facebook', function(err, user, info) {
+			console.log(arguments);
+		})(req,res,next);
+	},
+	twitterAuthenticate: function(req, res, next) {
+		passport.authenticate('twitter')(req, res, next);
+	},
+
+	twittercallback: function(req, res, next) {
+		passport.authenticate('twitter', {
+			successRedirect : '/',
+			failureRedirect : '/'
+		})(req, res, next);
+	},
+	googleAuthenticate: function(req, res, next) {
+		passport.authenticate('google', { scope : ['profile', 'email'] })(req, res, next);
+	},
+	googlecallback: function(req, res, next) {
+		passport.authenticate('google', {
+                    successRedirect : '/',
+                    failureRedirect : '/'
+            })(req, res, next);
+	},
+	logout: function(req, res) {
+		req.logout();
+		res.redirect('/');
 	}
 };
 
