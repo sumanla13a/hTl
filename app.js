@@ -9,7 +9,6 @@ var _ = require('underscore');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
-// var jwt = require('jwt');
 
 global.appRoot = path.resolve(__dirname);
 
@@ -17,7 +16,6 @@ var config = require(path.join(global.appRoot, 'configurations/config.json'));
 var authconfig = require(path.join(global.appRoot, 'configurations/auth.json')); 
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var collections = require('./routes/collections');
 var MyEmitter = require('./lib/events');
 var app = express();
@@ -43,6 +41,7 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/', express.static(path.join(__dirname, 'bower_components')));
 app.use('/', routes);
 if(authconfig.defaultUser) {
+  var users = require('./routes/users');
   app.use('/users', users);
 }
 
