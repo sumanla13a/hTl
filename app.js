@@ -40,10 +40,6 @@ app.use(cookieParser());
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/', express.static(path.join(__dirname, 'bower_components')));
 app.use('/', routes);
-if(authconfig.defaultUser) {
-  var users = require('./routes/users');
-  app.use('/users', users);
-}
 
 app.use('/collection', collections);
 var ModelsFn = require('./lib/generator');
@@ -51,6 +47,10 @@ var Apis = require('./lib/api_generator');
 new ModelsFn().then(function(models) {
   // TODO: add rest apis from here
   global.models = models;
+  if(authconfig.defaultUser) {
+    var users = require('./routes/users');
+    app.use('/users', users);
+  }
   var apis = new Apis(models);
   var keys = _.keys(models);
   keys.forEach(function(key) {

@@ -56,5 +56,5 @@ userSchema.methods.validPassword = function(password) {
 };
 
 var user = db.model('user', userSchema, 'user');
-
+global.models.user = user;
 module.exports = user;
