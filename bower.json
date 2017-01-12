@@ -1,0 +1,26 @@
+{
+  "name": "hTl",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sumanla13a/hTl",
+  "authors": [
+    "sumanla13a <lamasuman2@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "~1.1.1",
+    "angular-resource": "~1.6.1",
+    "angular-ui-router-styles": "~1.1.0",
+    "angular-ui": "~0.4.0",
+    "angular-ui-router": "~0.3.2",
+    "angularjs": "~1.6.1",
+    "jquery": "~3.1.1",
+    "underscore": "~1.8.3"
+  }
+}
