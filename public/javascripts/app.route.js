@@ -7,5 +7,5 @@
 		// $locationProvider.html5Mode(true);
 	} 
 	HotelCtrl.$inject = ['$stateProvider', '$locationProvider','$urlRouterProvider'];
-	window.angular.module('hotelCalifornia').config(HotelCtrl);
+	window.angular.module('app').config(HotelCtrl);
 })();

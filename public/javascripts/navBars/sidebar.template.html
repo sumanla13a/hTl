@@ -1,0 +1,13 @@
+<div layout="row" flex class="content-wrapper" flex="5">
+  <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+    <md-list class="collection-list">
+      <md-item ng-repeat="it in ctrl.collections.collections">
+        <md-item-content>
+          <md-button ng-click="ctrl.selectCollection(it)" ng-class="{'selected' : it === ctrl.selected }">
+              {{it}}
+          </md-button>
+        </md-item-content>
+      </md-item>
+    </md-list>
+  </md-sidenav>
+</div>

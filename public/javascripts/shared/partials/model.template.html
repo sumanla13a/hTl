@@ -1,0 +1,106 @@
+<div ng-if="!ctrl.toShowOrNotToShow()">
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Model: {{ctrl.value.current.name}}</span>
+        <span class="md-subhead">Make changes to model.</span>
+      </md-card-title-text>
+      <md-item>
+        <md-item-content>
+          <md-button class="md-raised" ng-click="ctrl.addCollection($event)">
+              New Collection
+          </md-button>
+        </md-item-content>
+      </md-item>
+      <md-item>
+        <md-item-content>
+          <md-button class="md-raised" ng-show="!ctrl.jsonView" ng-click="ctrl.changeView('json')">
+              Plain Json View
+          </md-button>
+        </md-item-content>
+      </md-item>
+      <md-item>
+        <md-item-content>
+          <md-button class="md-raised" ng-show="ctrl.jsonView" ng-click="ctrl.changeView('json')">
+              Form view
+          </md-button>
+        </md-item-content>
+      </md-item>
+      <md-item>
+        <md-item-content>
+          <md-button class="md-raised" ng-click="ctrl.changeView('api')">
+              List Apis
+          </md-button>
+        </md-item-content>
+      </md-item>
+    </md-card-title>
+  </md-card>
+  <div ng-show="!ctrl.jsonView && !ctrl.apiView">
+    <md-card ng-repeat="item in ctrl.value.current.keys">
+      <md-card-content>
+        <div layout="row">
+          <md-input-container>
+            <label>Attribute Name</label>
+            <input ng-model="item">
+          </md-input-container>
+          <md-input-container>
+            <label>Data Type</label>
+            <md-select ng-model="ctrl.value.current.data[item].type">
+              <md-option ng-disabled="$index === 1"><em>None</em></md-option>
+              <md-option ng-repeat="type in ctrl.value.dataTypes" ng-value="type">
+                {{type}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          
+          <!-- <md-input-container>
+            <md-checkbox
+                  ng-model="data.cb2"
+                  aria-label="Checkbox 2"
+                  ng-true-value="'yup'"
+                  ng-false-value="'nope'"
+                  class="md-warn md-align-top-right" flex>
+                Is Array?
+          </md-input-container> -->
+          <md-input-container>
+            <md-checkbox
+                  ng-model="ctrl.value.current.data[item].required"
+                  aria-label="Required"
+                  class="md-warn md-align-top-right" flex>
+                Required
+          </md-input-container>
+
+        </div>
+      </md-card-content>
+    </md-card>
+    <md-button class="md-raised md-warn" ng-click="ctrl.newAttribute()">Add</md-button>
+    <md-button class="md-raised md-warn">Delete</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.save()">Save</md-button>
+  </div>
+  <div ng-show="ctrl.jsonView && !ctrl.apiView">
+    <md-card>
+      <md-card-content>
+        <form name="jsonView" layout="row">
+          <md-input-container>
+            <label>JSON</label>
+            <textarea name="json" ng-model="ctrl.value.currentJSON" required style="width: 800px; min-height: 400px" ng-change="ctrl.isJSON()"></textarea>  
+          </md-input-container>
+        </form>
+      </md-card-content>
+    </md-card>
+    <md-button class="md-raised md-warn">Delete</md-button>
+    <md-button class="md-raised md-primary" ng-click="ctrl.saveJson()">Save</md-button>
+  </div>
+  <div ng-show="ctrl.apiView">
+    <md-card ng-repeat="api in ctrl.value.current.listOPath">
+      <md-item>
+        <md-item-content>
+          <md-button class="md-raised" ng-disabled="true">
+              {{api.method}}
+          </md-button>
+          <a href="{{api.path}" target="_blank"><span class="md-subhead">{{api.path}}</span></a>
+        </md-item-content>
+      </md-item>
+    </md-card>
+  </div>
+</div>

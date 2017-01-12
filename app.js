@@ -41,7 +41,9 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/', express.static(path.join(__dirname, 'bower_components')));
 app.use('/', routes);
 
-app.use('/collection', collections);
+if(config.development) {
+  app.use('/collections', collections);
+}
 var ModelsFn = require('./lib/generator');
 var Apis = require('./lib/api_generator');
 new ModelsFn().then(function(models) {

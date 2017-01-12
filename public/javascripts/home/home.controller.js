@@ -1,10 +1,13 @@
 (function() {
 	'use strict';
-	function HomeCtrl() {
-		// console.log('constructing');
-		console.log('hhh');
-		this.title = 'Hotel Home';
+	function HomeCtrl(NavBarSrvc, Modals) {
+		this.NavBarSrvc = NavBarSrvc;
+		this.modalSrvc = Modals;
+		console.log(NavBarSrvc);
 	}
-	HomeCtrl.$inject = [];
-	window.angular.module('Home').controller('HomeCtrl', HomeCtrl);
+
+	
+
+	HomeCtrl.$inject = ['NavBarSrvc', 'Modals'];
+	window.angular.module('app.Home').controller('HomeCtrl', HomeCtrl);
 })();

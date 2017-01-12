@@ -1,0 +1,41 @@
+<md-card>
+  <md-card-content>
+    <form layout="row">
+      <md-input-container>
+        <label>Attribute Name</label>
+        <input ng-model="ctrl.attribute.name" required>
+      </md-input-container>
+
+
+      <md-input-container>
+        <label>Data Type</label>
+        <md-select ng-model="ctrl.attribute.type" required>
+          <md-option ng-disabled="true"><em>None</em></md-option>
+          <md-option ng-repeat="type in ctrl.NavBarSrvc.dataTypes" ng-value="type">
+            {{type}}
+          </md-option>
+        </md-select>
+      </md-input-container>
+      
+      <!-- <md-input-container>
+        <md-checkbox
+              ng-model="data.cb2"
+              aria-label="Checkbox 2"
+              ng-true-value="'yup'"
+              ng-false-value="'nope'"
+              class="md-warn md-align-top-right" flex>
+            Is Array?
+      </md-input-container> -->
+      <md-input-container>
+        <md-checkbox
+              ng-model="ctrl.attribute.required"
+              aria-label="Required"
+              class="md-warn md-align-top-right" flex>
+            Required
+      </md-input-container>
+
+    </form>
+  </md-card-content>
+</md-card>
+<md-button class="md-raised md-warn" ng-click="ctrl.close()">Cancel</md-button>
+<md-button class="md-raised md-primary" ng-click="ctrl.save()">Save</md-button>

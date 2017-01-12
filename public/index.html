@@ -1,24 +1,41 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Hotel California</title>
+		<title>hTl Dashboard</title>
 		<link rel="stylesheet" href="/angular-material/angular-material.min.css" type="text/css">
 		<link rel="stylesheet" href="/javascripts/home/home.css">
 		<link rel="stylesheet" href="https://material.angularjs.org/1.1.1/docs.css">
 	</head>
 	<body>
+		<div ui-view name="nav"></div>
+		<div layout="row" layout-sm="column">
+			<div ui-view name="sideBar"  flex="25"></div>
+			<div ui-view name="content" flex="65"></div>
+		</div>
+		<!-- <div ui-view name='content' class="pull-right"></div> -->
+		
 		<script src="/angularjs/angular.min.js"></script>
-		<script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="/angular-aria/angular-aria.min.js"></script>
+		<script src="/angular-animate/angular-animate.min.js"></script>
+		<script src="/angular-resource/angular-resource.min.js"></script>
 		<script src="/angular-material/angular-material.min.js"></script>
-		<script src="/angular-ui-router-styles/ui-router-styles.js"></script>
-		<div ui-view name='nav'></div>
-		<div ui-view name='content'></div>
-		<script src="/javascripts/app.js"></script>
-		<script src="/javascripts/app.route.js"></script>
+		<script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="/underscore/underscore-min.js"></script>
+
+		<script src="/javascripts/shared/index.js"></script>
+		<script src="/javascripts/shared/services/underscore.js"></script>
+		<script src="/javascripts/shared/services/modal.js"></script>
+		<script src="/javascripts/shared/modalCtrl/attributeController.js"></script>
+		<script src="/javascripts/shared/modalCtrl/modelController.js"></script>
+
+		<script src="javascripts/shared/directives/modelStructure.js"></script>
 		<script src="/javascripts/home/home.js"></script>
 		<script src="/javascripts/home/home.controller.js"></script>
 		<script src="/javascripts/home/home.route.js"></script>
 		<script src="/javascripts/navBars/navBar.js"></script>
 		<script src="/javascripts/navBars/navBar.controller.js"></script>
+		<script src="/javascripts/navBars/navBar.service.js"></script>
+		<script src="/javascripts/app.js"></script>
+		<script src="/javascripts/app.route.js"></script>
 	</body>
 </html>

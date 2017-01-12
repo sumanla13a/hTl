@@ -1,0 +1,12 @@
+<md-card>
+  <md-card-content>
+    <div layout="row">
+      <md-input-container>
+        <label>Model Name</label>
+        <input ng-model="ctrl.modelName">
+      </md-input-container>
+    </div>
+  </md-card-content>
+</md-card>
+<md-button class="md-raised md-warn" ng-click="ctrl.close()">Cancel</md-button>
+<md-button class="md-raised md-primary" ng-click="ctrl.save()">Save</md-button>
