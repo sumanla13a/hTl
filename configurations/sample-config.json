@@ -5,6 +5,8 @@
 	"modelFolder": "modelJson",
 	"hooks": ["after_save.js", "before_save.js", "after_remove.js", "before_remove.js"],
 	"port": 3000,
+	"mongooseDataTypes": ["String", "Number", "Date", "Boolean"],
 	"secret": "hTlisasecretproject",
-	"baseUrl": ""
+	"defaultUser": true,
+	"development": true
 }
