@@ -9,6 +9,7 @@ var _ = require('underscore');
 var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
+var fs = require('fs');
 
 global.appRoot = path.resolve(__dirname);
 
@@ -33,7 +34,12 @@ app.use(passport.session());
 app.use(flash());
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
+
+// setup the logger
+app.use(logger('combined', {stream: accessLogStream}));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
