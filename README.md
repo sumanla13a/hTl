@@ -16,3 +16,4 @@
 <code> create a new folder in that folder with a json file of same name. Add mongoose schema there to create collection and basic rest apis</code>
 
 <Strong> The hooks will be in the same folder as model schema. Each hook file must export a function.</Strong>
+<strong> To use default user module, add property `defaultUser: true` in configurations/auth.json</strong>
